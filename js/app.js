@@ -1,3 +1,9 @@
+//This is the speed. I wouldn't recommend changing it.
+var Speed = function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1));
+};
+
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
@@ -8,6 +14,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = Speed(65, 255);
 };
 
 // Update the enemy's position, required method for game
@@ -16,7 +23,11 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + 100 * dt;
+    if ( this.x < 505) {
+        this.x += this.speed * dt;
+    } else {
+        this.x = -111;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -76,8 +87,15 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-enemy1 = new Enemy(-101, 202);
-allEnemies = [enemy1];
+var allEnemies = [];
+var yVals = [220, 140, 60];
+for (var i = 0; i < 11; i++) {
+    var x = Math.floor((Math.random() * -10000) + 1);
+    var y = yVals[Math.floor((Math.random() * 2))];
+    enemy = new Enemy(x, y);
+    allEnemies.push(enemy);
+};
+
 
 player = new Player(200, 400);
 
