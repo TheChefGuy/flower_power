@@ -36,9 +36,9 @@ var Player = function(x,y) {
 Player.prototype.handleInput = function(dir) {
 
     if (dir === 'up') {
-        this.y = this.y - 100;
+        this.y = this.y - 85;
     } else if (dir === 'down') {
-        this.y = this.y + 100;
+        this.y = this.y + 85;
     } else if (dir === 'left') {
         this.x = this.x - 100;
     } else if (dir === 'right') {
@@ -47,6 +47,21 @@ Player.prototype.handleInput = function(dir) {
         // do nothing, user gave an invalid input
     };
 
+    if (this.x < 0) {
+        this.x = 0;
+    } else if (this.x > 400) {
+        this.x = 400;
+    } else if (this.y < 0) {
+        this.reset();
+    } else if (this.y > 400) {
+        this.y = 400;
+    };
+
+};
+
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
 };
 
 Player.prototype.update = function() {
