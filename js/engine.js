@@ -80,7 +80,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        //checkCollisions();
+        // checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -115,6 +115,15 @@ var Engine = (function(global) {
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
+            topRowImages = [
+                'images/water-block.png',   // top row has special images
+                'images/water-block.png',
+                'images/water-block.png',
+                'images/water-block.png',
+                'images/water-block.png',
+                'images/water-block.png',
+                'images/water-block.png'
+            ],
             numRows = 6,
             numCols = 7,
             row, col;
@@ -132,7 +141,11 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                if (row===0) {
+                    ctx.drawImage(Resources.get(topRowImages[col]), col * 101, row * 83);
+                } else {
+                    ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                }
             }
         }
 
