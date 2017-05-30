@@ -9,7 +9,9 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.multiplier = Math.floor((Math.random() * 4) + 1);
+    this.speed = Math.floor((Math.random() * 4) + 1);
+    this.width = 50;
+    this.height = 50;
 };
 
 // Update the enemy's position, required method for game
@@ -18,14 +20,29 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x = this.x + 101 * dt * this.multiplier;
+    this.x = this.x + 101 * dt * this.speed;
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
     if (this.x > 555) {
-    	this.multiplier = Math.floor((Math.random() * 4) + 1);
+    	this.speed = Math.floor((Math.random() * 4) + 1);
     	this.reset();
     }
+    // Collision
+    this.collisions();
+
+    
 };
+
+// Helper function to see enemy/player box area
+function drawBox(x, y, width, height, color) {
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+};
+
+
 
 // Reset the enemy to the left of the board
 Enemy.prototype.reset = function() {
@@ -35,6 +52,32 @@ Enemy.prototype.reset = function() {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // draws boxes around enemy objects
+    drawBox(this.x, this.y + 77, 100, 67, "yellow");
+};
+
+// Collisions - this is bound to an instance of the enemy
+Enemy.prototype.collisions = function() {
+    var enemyBox = {
+        x: this.x,
+        y: this.y,
+        width: this.width,
+        height: this.height
+    };
+    var playerBox = {
+        x: player.x,
+        y: player.y,
+        width: player.width,
+        height: player.height
+    };
+    if (enemyBox.x < playerBox.x + playerBox.width &&
+        enemyBox.x + enemyBox.width > playerBox.x &&
+        enemyBox.y < playerBox.y + playerBox.height &&
+        enemyBox.height + enemyBox.y > playerBox.y) {
+        // collision detected!
+        //console.log("Collision is detected.");
+        player.collision();
+    }
 };
 
 // Now write your own player class
@@ -46,30 +89,29 @@ var Player = function(x,y) {
     this.y = y;
 };
 
-Player.prototype.handleInput = function(dir) {
-
-    if (dir === 'up') {
-        this.y = this.y - 85;
-    } else if (dir === 'down') {
-        this.y = this.y + 85;
-    } else if (dir === 'left') {
-        this.x = this.x - 100;
-    } else if (dir === 'right') {
-        this.x = this.x + 100;
-    } else {
-        // do nothing, user gave an invalid input
-    };
-
-    if (this.x < 0) {
-        this.x = 0;
-    } else if (this.x > 400) {
-        this.x = 400;
-    } else if (this.y < 0) {
-        this.reset();
-    } else if (this.y > 400) {
-        this.y = 400;
-    };
-
+Player.prototype.handleInput = function(key) {
+    switch (key) {
+        case "left":
+            if (this.x > 20) {
+                this.x -= 100;
+            }
+            break;
+        case "right":
+            if (this.x < 380) {
+                this.x += 100;
+            }
+            break;
+        case "up":
+            if (this.y > 0) {
+                this.y -= 100;
+            }
+            break;
+        case "down":
+            if (this.y < 400) {
+                this.y += 100;
+            }
+            break;
+    }
 };
 
 Player.prototype.reset = function() {
@@ -78,8 +120,9 @@ Player.prototype.reset = function() {
 };
 
 Player.prototype.update = function() {
-    this.x = this.x;
-    this.y = this.y;
+    if (this.y < 5) { // if player reaches the water
+        this.reset(); // position resets
+    }
 };
 
 Player.prototype.render = function() {
