@@ -1,8 +1,3 @@
-//This is the speed. I wouldn't recommend changing it.
-var Speed = function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1));
-};
-
 
 // Enemies our player must avoid
 var Enemy = function(x,y) {
@@ -14,7 +9,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = Speed(65, 255);
+    this.multiplier = Math.floor((Math.random() * 4) + 1);
 };
 
 // Update the enemy's position, required method for game
@@ -23,11 +18,18 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if ( this.x < 505) {
-        this.x += this.speed * dt;
-    } else {
-        this.x = -111;
+    this.x = this.x + 101 * dt * this.multiplier;
+
+    // If the bug goes off of the board, reset its position and randomize the multiplier
+    if (this.x > 650) {
+    	this.multiplier = Math.floor((Math.random() * 4) + 1);
+    	this.reset();
     }
+};
+
+// Reset the enemy to the left of the board
+Enemy.prototype.reset = function() {
+	this.x = -200;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -89,7 +91,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 var yVals = [220, 140, 60];
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 11; i++) {
     var x = Math.floor((Math.random() * -1000) + 1);
     var y = yVals[Math.floor((Math.random() * 3))];
     enemy = new Enemy(x, y);
