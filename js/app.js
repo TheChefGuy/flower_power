@@ -23,7 +23,7 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + 101 * dt * this.speed;
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
-    if (this.x > 555) {
+    if (this.x > 777) {
     	this.speed = Math.floor((Math.random() * 4) + 1);
     	this.reset();
     }
@@ -46,7 +46,7 @@ function drawBox(x, y, width, height, color) {
 
 // Reset the enemy to the left of the board
 Enemy.prototype.reset = function() {
-	this.x = -200;
+	this.x = -111;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -93,7 +93,7 @@ var Player = function(x,y) {
     // Load player image
     this.sprite = 'images/char-boy.png';
     // Starting coordinates
-    this.x = 200;
+    this.x = 300;
     this.y = 400;
     // Player collision area
     this.width = 50;
@@ -102,7 +102,7 @@ var Player = function(x,y) {
 
 // Player reset method
 Player.prototype.reset = function() {
-    this.x = 200;
+    this.x = 300;
     this.y = 400;
 };
 
@@ -135,7 +135,7 @@ Player.prototype.handleInput = function(key) {
             }
             break;
         case "right":
-            if (this.x < 380) {
+            if (this.x < 580) {
                 this.x += 100;
             }
             break;
