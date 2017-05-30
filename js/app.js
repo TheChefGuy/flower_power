@@ -89,9 +89,9 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 var yVals = [220, 140, 60];
-for (var i = 0; i < 11; i++) {
-    var x = Math.floor((Math.random() * -10000) + 1);
-    var y = yVals[Math.floor((Math.random() * 2))];
+for (var i = 0; i < 6; i++) {
+    var x = Math.floor((Math.random() * -1000) + 1);
+    var y = yVals[Math.floor((Math.random() * 3))];
     enemy = new Enemy(x, y);
     allEnemies.push(enemy);
 };
