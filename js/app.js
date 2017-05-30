@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + 101 * dt * this.multiplier;
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
-    if (this.x > 650) {
+    if (this.x > 555) {
     	this.multiplier = Math.floor((Math.random() * 4) + 1);
     	this.reset();
     }
@@ -91,7 +91,7 @@ Player.prototype.render = function() {
 // Place the player object in a variable called player
 var allEnemies = [];
 var yVals = [220, 140, 60];
-for (var i = 0; i < 11; i++) {
+for (var i = 0; i < 6; i++) {
     var x = Math.floor((Math.random() * -1000) + 1);
     var y = yVals[Math.floor((Math.random() * 3))];
     enemy = new Enemy(x, y);
