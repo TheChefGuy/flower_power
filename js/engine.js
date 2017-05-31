@@ -189,7 +189,12 @@ var Engine = (function(global) {
         'images/stone-block-green.png',
         'images/stone-block-orange.png',
         'images/stone-block-red.png',
-        'images/stone-block-purple.png'
+        'images/stone-block-purple.png',
+        'images/enemy-red.png',
+        'images/enemy-purple.png',
+        'images/enemy-yellow.png',
+        'images/enemy-blue.png',
+        'images/enemy-green.png'
     ]);
     Resources.onReady(init);
 

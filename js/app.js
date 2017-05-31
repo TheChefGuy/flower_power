@@ -1,7 +1,13 @@
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // The image/sprite for our enemies
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = [
+        'images/enemy-red.png',
+        'images/enemy-purple.png',
+        'images/enemy-yellow.png',
+        'images/enemy-blue.png',
+        'images/enemy-green.png'
+    ];
 
     // Variables applied to each instance 
     this.x = x;
@@ -51,7 +57,7 @@ Enemy.prototype.reset = function() {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite[Math.floor(Math.random() * this.sprite.length)]), this.x, this.y);
     
     // Draws boxes around enemy objects
     // Helped to understand box collision method
