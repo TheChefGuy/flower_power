@@ -108,8 +108,10 @@ Player.prototype.reset = function() {
 
 // Player update method
 Player.prototype.update = function() {
-    if (this.y < 5) { // if player reaches the water
-        this.reset(); // position resets
+    if (this.x > 111 || this.x < 555) {
+        this.y < 6;
+    } else { // if player reaches the water
+        this.y < 5; // position resets
     }
 };
 
@@ -127,29 +129,39 @@ Player.prototype.render = function() {
 };
 
 // Player input handler
-Player.prototype.handleInput = function(key) {
-    switch (key) {
-        case "left":
-            if (this.x > 20) {
-                this.x -= 100;
-            }
-            break;
-        case "right":
-            if (this.x < 580) {
-                this.x += 100;
-            }
-            break;
-        case "up":
-            if (this.y > 0) {
-                this.y -= 85;
-            }
-            break;
-        case "down":
-            if (this.y < 400) {
-                this.y += 85;
-            }
-            break;
-    }
+Player.prototype.handleInput = function(dir) {
+
+	// Change the player's position based on the user keyboard input
+	if (dir == 'up') {
+		this.y = this.y - 82;
+	} else if (dir == 'down') {
+		this.y = this.y + 82;
+	} else if (dir == 'left') {
+		this.x = this.x - 100;
+	} else if (dir == 'right') {
+		this.x = this.x + 100;
+	}
+
+	// Check the position of the player
+	if (this.x < 0) {
+		// Player is off to the left side of the board, move the player
+		// back to zero
+		this.x = 0;
+
+	} else if (this.x > 606) {
+		// Player is off to the right side of the board, move the player
+		// back to the right-most square (606)
+		this.x = 606;
+
+	} else if (this.y > 404) {
+		// Player is off the bottom of the board
+		this.reset();
+
+	} else if (this.y <= 0 && (this.x === 0 || this.x === 600)) {
+		// Player made it to one of the two water blocks
+        this.reset();
+		}
+    
 };
 
 // Now instantiate your objects.
