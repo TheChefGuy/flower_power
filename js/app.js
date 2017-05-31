@@ -1,7 +1,10 @@
 // Enemies our player must avoid
 var Enemy = function(x,y) {
+    // Variables applied to each instance 
+    this.x = x;
+    this.y = y;
     // The image/sprite for our enemies
-    this.sprite = [
+    this.sprites = [
         'images/enemy-red.png',
         'images/enemy-purple.png',
         'images/enemy-yellow.png',
@@ -9,9 +12,12 @@ var Enemy = function(x,y) {
         'images/enemy-green.png'
     ];
 
-    // Variables applied to each instance 
-    this.x = x;
-    this.y = y;
+    this.spriteIndex = function(){
+        ctx.drawImage(Resources.get(this.sprites[Math.floor(Math.random() * this.sprite.length)]))
+    };
+
+    this.sprite = this.sprites;
+
 
     // Random speed generator
     this.speed = Math.floor((Math.random() * 4) + 1);
@@ -57,7 +63,7 @@ Enemy.prototype.reset = function() {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite[Math.floor(Math.random() * this.sprite.length)]), this.x, this.y);
+    
     
     // Draws boxes around enemy objects
     // Helped to understand box collision method
