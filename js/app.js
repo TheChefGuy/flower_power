@@ -159,6 +159,7 @@ Player.prototype.handleInput = function(dir) {
 
 	} else if (this.y <= 0 && (this.x === 0 || this.x === 600)) {
 		// Player made it to one of the two water blocks
+        console.log("you drowned!");
         this.reset();
 		}
     
