@@ -148,21 +148,24 @@ Player.prototype.handleInput = function(dir) {
 		// back to zero
 		this.x = 0;
 
-	} else if (this.x > 606) {
+	} else if (this.x > 600) {
 		// Player is off to the right side of the board, move the player
 		// back to the right-most square (606)
-		this.x = 606;
+		this.x = 600;
 
-	} else if (this.y > 404) {
+	} else if (this.y > 400) {
 		// Player is off the bottom of the board
-		this.reset();
+		this.y = 400;
 
 	} else if (this.y <= 0 && (this.x === 0 || this.x === 600)) {
 		// Player made it to one of the two water blocks
-        console.log("you drowned!");
+        console.log("You drowned!");
         this.reset();
-		}
-    
+
+	} else if (this.y < 0) {
+        // Player is off the top of the board
+        this.y = -10;
+    }
 };
 
 // Now instantiate your objects.
@@ -173,7 +176,9 @@ var yVals = [220, 140, 60];
 // Random speed generator to create new speed for new enemy
 // Controls number of enemies on screen
 for (var i = 0; i < 6; i++) {
+    // Random speed for new enemy
     var x = Math.floor((Math.random() * -1000) + 1);
+    // Random row referencing yVals
     var y = yVals[Math.floor((Math.random() * 3))];
     enemy = new Enemy(x, y);
     // Place new enemy in allEnemies array
