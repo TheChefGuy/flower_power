@@ -12,12 +12,13 @@ var Enemy = function(x,y) {
         'images/enemy-green.png'
     ];
 
-    this.spriteIndex = function(){
-        ctx.drawImage(Resources.get(this.sprites[Math.floor(Math.random() * this.sprite.length)]))
-    };
+    this.spriteIndex = Math.random() * this.sprites.length;
+
+    this.sprite = this.sprites[this.spriteIndex];
 
     this.sprite = this.sprites;
 
+    this.assignRandomSprite();
 
     // Random speed generator
     this.speed = Math.floor((Math.random() * 4) + 1);
@@ -25,6 +26,11 @@ var Enemy = function(x,y) {
     // Enemy collision area
     this.width = 50;
     this.height = 50;
+};
+
+Enemy.prototype.assignRandomSprite = function() {
+  this.spriteIndex = Math.floor(Math.random() * this.sprites.length);
+  this.sprite = this.sprites[this.spriteIndex];
 };
 
 // Update the enemy's position, required method for game
@@ -63,8 +69,8 @@ Enemy.prototype.reset = function() {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    
-    
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
     // Draws boxes around enemy objects
     // Helped to understand box collision method
     // drawBox(this.x, this.y + 77, 100, 67, "");
