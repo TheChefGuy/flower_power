@@ -65,6 +65,7 @@ function drawBox(x, y, width, height, color) {
 // Reset the enemy to the left of the board
 Enemy.prototype.reset = function() {
 	this.x = -111;
+    this.assignRandomSprite();
 };
 
 // Draw the enemy on the screen, required method for game
