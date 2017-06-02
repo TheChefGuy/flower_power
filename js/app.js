@@ -202,7 +202,7 @@ Flower.prototype.update = function() {
     if (this.y === player.y && this.x === player.x) {
 
         // Change player to holding flower
-        player.sprite = 'images/' + this.color + '-cat-girl.png';
+        player.sprite = 'images/cat-girl-' + this.color + '.png';
         this.x = x;
         this.y = y;
     }

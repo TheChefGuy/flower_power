@@ -209,11 +209,11 @@ var Engine = (function(global) {
         'images/flower-purple.png',
         'images/flower-red.png',
         'images/flower-orange.png',
-        'images/blue-cat-girl.png',
-        'images/pink-cat-girl.png',
-        'images/red-cat-girl.png',
-        'images/purple-cat-girl.png',
-        'images/orange-cat-girl.png'
+        'images/cat-girl-blue.png',
+        'images/cat-girl-pink.png',
+        'images/cat-girl-red.png',
+        'images/cat-girl-purple.png',
+        'images/cat-girl-orange.png'
     ]);
     Resources.onReady(init);
 
