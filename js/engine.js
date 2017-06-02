@@ -94,7 +94,12 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+
         player.update();
+
+        allFlowers.forEach(function(flower) {
+            flower.update();
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -165,6 +170,10 @@ var Engine = (function(global) {
         });
 
         player.render();
+
+        allFlowers.forEach(function(flower) {
+            flower.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -184,7 +193,7 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png',
+        'images/char-cat-girl.png',
         'images/stone-block-blue.png',
         'images/stone-block-green.png',
         'images/stone-block-orange.png',
@@ -194,7 +203,17 @@ var Engine = (function(global) {
         'images/enemy-purple.png',
         'images/enemy-yellow.png',
         'images/enemy-blue.png',
-        'images/enemy-green.png'
+        'images/enemy-green.png',
+        'images/flower-pink.png',
+        'images/flower-blue.png',
+        'images/flower-purple.png',
+        'images/flower-red.png',
+        'images/flower-orange.png',
+        'images/blue-cat-girl.png',
+        'images/pink-cat-girl.png',
+        'images/red-cat-girl.png',
+        'images/purple-cat-girl.png',
+        'images/orange-cat-girl.png'
     ]);
     Resources.onReady(init);
 

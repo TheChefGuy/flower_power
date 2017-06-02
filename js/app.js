@@ -110,7 +110,7 @@ Enemy.prototype.collisions = function() {
 // Player class
 var Player = function(x,y) {
     // Load player image
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-cat-girl.png';
     // Starting coordinates
     this.x = 300;
     this.y = 400;
@@ -127,11 +127,8 @@ Player.prototype.reset = function() {
 
 // Player update method
 Player.prototype.update = function() {
-    if (this.x > 111 || this.x < 555) {
-        this.y < 6;
-    } else { // if player reaches the water
-        this.y < 5; // position resets
-    }
+    this.x = this.x;
+    this.y = this.y;
 };
 
 // Player collision method
@@ -187,26 +184,62 @@ Player.prototype.handleInput = function(dir) {
     }
 };
 
+// Create flower object
+var Flower = function(color, x, y) {
+    this.color = color;
+
+    this.sprite = 'images/flower-' + color + '.png';
+    this.x = x;
+    this.y = y;
+
+};
+
+Flower.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Flower.prototype.update = function() {
+    if (this.y === player.y && this.x === player.x) {
+
+        // Change player to holding flower
+        player.sprite = 'images/' + this.color + '-cat-girl.png';
+        this.x = x;
+        this.y = y;
+    }
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 // Y values for enemy starting
-var yVals = [220, 140, 60];
+var yValsEnemy = [220, 140, 60];
+
 // Random speed generator to create new speed for new enemy
 // Controls number of enemies on screen
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 7; i++) {
     // Random speed for new enemy
     var x = Math.floor((Math.random() * -1000) + 1);
     // Random row referencing yVals
-    var y = yVals[Math.floor((Math.random() * 3))];
+    var y = yValsEnemy[Math.floor(Math.random() * 3)];
     enemy = new Enemy(x, y);
     // Place new enemy in allEnemies array
     allEnemies.push(enemy);
 };
 
-// Starting player object in a variable called player
+// Instantiate player object 
 player = new Player();
 
+// Instantiate the flowers
+var colors = ['red', 'blue', 'orange', 'purple', 'pink'];
+var xValsFlowers = [15, 115, 220, 320, 420, 520, 620];
+var yValsFlowers = [220, 135, 300];
+var allFlowers = [];
+for (var j = 0; j < 5; j++) {
+    var x = xValsFlowers[Math.floor(Math.random() * 7)];
+    var y = yValsFlowers[Math.floor(Math.random() * 3)];
+    flower = new Flower(colors[j], x, y);
+    allFlowers.push(flower);
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method
