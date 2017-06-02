@@ -138,6 +138,8 @@ Player.prototype.collision = function() {
 
 Player.prototype.flowerPower = function() {
     player.power = player.sprite = 'images/cat-girl-' + this.color + '.png';
+    this.x = this.x;
+    this.y = this.y;
 }
 
 // Player render method
@@ -227,13 +229,13 @@ Flower.prototype.power = function() {
         height: player.height
     };
 
-    if (flowerBox.x < flowerBox.x + playerBox.width &&
+    if (flowerBox.x < playerBox.x + playerBox.width &&
         flowerBox.x + flowerBox.width > playerBox.x &&
         flowerBox.y < playerBox.y + playerBox.height &&
         flowerBox.height + flowerBox.y > playerBox.y) {
         
         // Collision detected!
-        console.log("Collision is detected.");
+        console.log("Flower Power!");
         player.flowerPower();
     }
 };
