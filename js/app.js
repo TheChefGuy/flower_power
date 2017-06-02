@@ -136,6 +136,10 @@ Player.prototype.collision = function() {
     player.reset();
 };
 
+Player.prototype.flowerPower = function() {
+    player.power = player.sprite = 'images/cat-girl-' + this.color + '.png';
+}
+
 // Player render method
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -192,6 +196,8 @@ var Flower = function(color, x, y) {
     this.x = x;
     this.y = y;
 
+    this.width = 17;
+    this.height = 17;
 };
 
 Flower.prototype.render = function() {
@@ -199,14 +205,38 @@ Flower.prototype.render = function() {
 };
 
 Flower.prototype.update = function() {
-    if (this.y === player.y && this.x === player.x) {
-
-        // Change player to holding flower
-        player.sprite = 'images/cat-girl-' + this.color + '.png';
-        this.x = x;
-        this.y = y;
-    }
+    this.power();
 }
+
+// Collisions - this is bound to an instance of the flower
+Flower.prototype.power = function() {
+    var flowerBox = {
+        // Variables applied to each instance 
+        x: this.x,
+        y: this.y,
+        // Flower collision area
+        width: this.width,
+        height: this.height
+    };
+    var playerBox = {
+        // Variables applied to each instance 
+        x: player.x,
+        y: player.y,
+        // Enemy collision area
+        width: player.width,
+        height: player.height
+    };
+
+    if (flowerBox.x < flowerBox.x + playerBox.width &&
+        flowerBox.x + flowerBox.width > playerBox.x &&
+        flowerBox.y < playerBox.y + playerBox.height &&
+        flowerBox.height + flowerBox.y > playerBox.y) {
+        
+        // Collision detected!
+        console.log("Collision is detected.");
+        player.flowerPower();
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
