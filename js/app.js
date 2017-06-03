@@ -136,10 +136,8 @@ Player.prototype.collision = function() {
     player.reset();
 };
 
-Player.prototype.flowerPower = function() {
-    player.power = player.sprite = 'images/cat-girl-' + this.color + '.png';
-    this.x = this.x;
-    this.y = this.y;
+Player.prototype.flowerPower = function(color) {
+    player.power = player.sprite = 'images/cat-girl-' + color + '.png';
 }
 
 // Player render method
@@ -195,11 +193,12 @@ var Flower = function(color, x, y) {
     this.color = color;
 
     this.sprite = 'images/flower-' + color + '.png';
+
     this.x = x;
     this.y = y;
 
-    this.width = 17;
-    this.height = 17;
+    this.width = 50;
+    this.height = 50;
 };
 
 Flower.prototype.render = function() {
@@ -236,7 +235,11 @@ Flower.prototype.power = function() {
         
         // Collision detected!
         console.log("Flower Power!");
-        player.flowerPower();
+        // Move flower of screen
+        this.x = -100;
+        this.y = -100;
+
+        player.flowerPower(this.color);
     }
 };
 
