@@ -74,7 +74,7 @@ Enemy.prototype.render = function() {
 
     // Draws boxes around enemy objects
     // Helped to understand box collision method
-    drawBox(this.x, this.y, 100, 67, "");
+    // drawBox(this.x, this.y, 100, 67, "");
 };
 
 // Collisions - this is bound to an instance of the enemy
@@ -113,7 +113,7 @@ var Player = function(x,y) {
     this.sprite = 'images/char-cat-girl.png';
     // Starting coordinates
     this.x = 321;
-    this.y = 467;
+    this.y = 464;
     // Player collision area
     this.width = 50;
     this.height = 50;
@@ -122,13 +122,12 @@ var Player = function(x,y) {
 // Player reset method
 Player.prototype.reset = function() {
     this.x = 321;
-    this.y = 467;
+    this.y = 464;
 };
 
 // Player update method
 Player.prototype.update = function() {
-    this.x = this.x;
-    this.y = this.y;
+
 };
 
 // Player collision method
@@ -145,7 +144,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     
     // draws a box around player object
-    drawBox(this.x, this.y, 70, 78, "blue");
+    // drawBox(this.x, this.y, 70, 78, "blue");
 };
 
 // Player input handler
@@ -166,25 +165,25 @@ Player.prototype.handleInput = function(dir) {
 	if (this.x < 0) {
 		// Player is off to the left side of the board, move the player
 		// back to zero
-		this.x = 0;
+		this.x = 21;
 
-	} else if (this.x > 600) {
+	} else if (this.x > 650) {
 		// Player is off to the right side of the board, move the player
-		// back to the right-most square (606)
-		this.x = 600;
+		// back to the right-most square 
+		this.x = 621;
 
 	} else if (this.y > 500) {
 		// Player is off the bottom of the board
 		this.y = 467;
 
-	} else if (this.y <= 0 && (this.x === 0 || this.x === 600)) {
+	} else if (this.y === 54 && (this.x === 21 || this.x === 621 )) {
 		// Player made it to one of the two water blocks
         console.log("You drowned!");
         this.reset();
 
 	} else if (this.y < 0) {
         // Player is off the top of the board
-        this.y = -10;
+        this.y = 54;
     }
 };
 
@@ -205,7 +204,7 @@ Flower.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
     // draws a box around flower object
-     drawBox(this.x, this.y, 70, 78, "blue");
+    // drawBox(this.x, this.y, 70, 78, "blue");
 };
 
 Flower.prototype.update = function() {
@@ -250,7 +249,7 @@ Flower.prototype.power = function() {
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
 // Y values for enemy starting
-var yValsEnemy = [220, 140, 60];
+var yValsEnemy = [220, 140, 300];
 
 // Random speed generator to create new speed for new enemy
 // Controls number of enemies on screen
