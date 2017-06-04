@@ -112,8 +112,8 @@ var Player = function(x,y) {
     // Load player image
     this.sprite = 'images/char-cat-girl.png';
     // Starting coordinates
-    this.x = 300;
-    this.y = 400;
+    this.x = 321;
+    this.y = 467;
     // Player collision area
     this.width = 50;
     this.height = 50;
@@ -121,8 +121,8 @@ var Player = function(x,y) {
 
 // Player reset method
 Player.prototype.reset = function() {
-    this.x = 300;
-    this.y = 400;
+    this.x = 321;
+    this.y = 467;
 };
 
 // Player update method
@@ -173,9 +173,9 @@ Player.prototype.handleInput = function(dir) {
 		// back to the right-most square (606)
 		this.x = 600;
 
-	} else if (this.y > 400) {
+	} else if (this.y > 500) {
 		// Player is off the bottom of the board
-		this.y = 400;
+		this.y = 467;
 
 	} else if (this.y <= 0 && (this.x === 0 || this.x === 600)) {
 		// Player made it to one of the two water blocks
@@ -197,12 +197,15 @@ var Flower = function(color, x, y) {
     this.x = x;
     this.y = y;
 
-    this.width = 50;
-    this.height = 50;
+    this.width = 25;
+    this.height = 25;
 };
 
 Flower.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+    // draws a box around flower object
+     drawBox(this.x, this.y, 70, 78, "blue");
 };
 
 Flower.prototype.update = function() {
