@@ -74,7 +74,7 @@ Enemy.prototype.render = function() {
 
     // Draws boxes around enemy objects
     // Helped to understand box collision method
-    // drawBox(this.x, this.y + 77, 100, 67, "");
+    drawBox(this.x, this.y, 100, 67, "");
 };
 
 // Collisions - this is bound to an instance of the enemy
@@ -145,7 +145,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     
     // draws a box around player object
-    // drawBox(this.x + 16, this.y + 62, 70, 78, "blue");
+    drawBox(this.x, this.y, 70, 78, "blue");
 };
 
 // Player input handler
