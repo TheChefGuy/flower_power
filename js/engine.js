@@ -124,7 +124,7 @@ var Engine = (function(global) {
                 'images/water-block.png',   // top row has special images
                 'images/stone-block-red.png',
                 'images/stone-block-orange.png',
-                'images/stone-block-green.png',
+                'images/stone-block-pink.png',
                 'images/stone-block-blue.png',
                 'images/stone-block-purple.png',
                 'images/water-block.png'
@@ -195,7 +195,7 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-cat-girl.png',
         'images/stone-block-blue.png',
-        'images/stone-block-green.png',
+        'images/stone-block-pink.png',
         'images/stone-block-orange.png',
         'images/stone-block-red.png',
         'images/stone-block-purple.png',

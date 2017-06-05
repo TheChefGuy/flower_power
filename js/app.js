@@ -123,11 +123,14 @@ var Player = function(x,y) {
 
 // Player reset method
 Player.prototype.reset = function() {
+    // Load player image
+    this.sprite = 'images/char-cat-girl.png';
     // Reset to original starting coordinates
     this.x = 321;
     this.y = 464;
     // Reset hold flower
     this.hold = false;
+    flower.reset();
 };
 
 // Player update method
@@ -142,7 +145,8 @@ Player.prototype.collision = function() {
 
 Player.prototype.flowerPower = function(color) {
     // Change player image when touch flower
-    player.power = player.sprite = 'images/cat-girl-' + color + '.png';
+    player.power = this.sprite = 'images/cat-girl-' + color + '.png';
+    this.hold = true;
 }
 
 // Player render method
@@ -186,6 +190,7 @@ Player.prototype.handleInput = function(dir) {
 		// Player made it to one of the two water blocks
         console.log("You drowned!");
         this.reset();
+        flower.reset();
 
 	} else if (this.y < 0) {
         // Player is off the top of the board
@@ -201,6 +206,9 @@ var Flower = function(color, x, y) {
 
     this.x = x;
     this.y = y;
+    // Set original position for flower
+    this.xo = x;
+    this.yo = y;
 
     this.width = 25;
     this.height = 25;
@@ -212,6 +220,11 @@ Flower.prototype.render = function() {
     // draws a box around flower object
     // drawBox(this.x, this.y, 70, 78, "blue");
 };
+
+Flower.prototype.reset = function() {
+    this.x = this.xo;
+    this.y = this.yo;
+}
 
 Flower.prototype.update = function() {
     this.power();
