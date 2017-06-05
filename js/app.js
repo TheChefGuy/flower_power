@@ -117,12 +117,17 @@ var Player = function(x,y) {
     // Player collision area
     this.width = 50;
     this.height = 50;
+    // Player holds flower
+    this.hold = false;
 };
 
 // Player reset method
 Player.prototype.reset = function() {
+    // Reset to original starting coordinates
     this.x = 321;
     this.y = 464;
+    // Reset hold flower
+    this.hold = false;
 };
 
 // Player update method
@@ -136,6 +141,7 @@ Player.prototype.collision = function() {
 };
 
 Player.prototype.flowerPower = function(color) {
+    // Change player image when touch flower
     player.power = player.sprite = 'images/cat-girl-' + color + '.png';
 }
 
@@ -241,6 +247,8 @@ Flower.prototype.power = function() {
         this.x = -100;
         this.y = -100;
 
+        player.hold = true;
+
         player.flowerPower(this.color);
     }
 };
@@ -270,12 +278,38 @@ player = new Player();
 var colors = ['red', 'blue', 'orange', 'purple', 'pink'];
 var xValsFlowers = [15, 115, 220, 320, 420, 520, 620];
 var yValsFlowers = [220, 135, 300];
+
+// Create xy variable for flower
+// Make sure only one flower occupies a space
+var xyLocations = [];
+
+// Look through the x & y values and push each location pair
+// into the xyLocations array
+for (l = 0; l < xValsFlowers.length; l++) {
+	for (n = 0; n < yValsFlowers.length; n++) {
+		xyLocations.push([xValsFlowers[l], yValsFlowers[n]]);
+	}
+}
+
+// Create allFlowers array to hold flower objects
 var allFlowers = [];
+// Create the separate flower instances
 for (var j = 0; j < 5; j++) {
-    var x = xValsFlowers[Math.floor(Math.random() * 7)];
-    var y = yValsFlowers[Math.floor(Math.random() * 3)];
-    flower = new Flower(colors[j], x, y);
-    allFlowers.push(flower);
+
+	// Select a random starting location for the flower
+	var index = Math.floor(Math.random() * (21 - j));
+	var xy = xyLocations[index];
+	var x = xy[0];
+	var y = xy[1];
+
+	// Create the new flower object
+	flower = new Flower(colors[j], x, y);
+
+	// Push the new flower into the array
+	allFlowers.push(flower);
+
+	// Remove the xy pair from the array
+	xyLocations.splice(index, 1);
 }
 
 // This listens for key presses and sends the keys to your
