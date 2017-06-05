@@ -186,7 +186,7 @@ Player.prototype.handleInput = function(dir) {
 
 	} else if (this.y > 500) {
 		// Player is off the bottom of the board
-		this.y = 467;
+		this.y = 464;
 
 	} else if (this.y === 54 && (this.x === 21 || this.x === 621 )) {
 		// Player made it to one of the two water blocks
