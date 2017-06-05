@@ -239,7 +239,8 @@ Flower.prototype.power = function() {
     if (flowerBox.x < playerBox.x + playerBox.width &&
         flowerBox.x + flowerBox.width > playerBox.x &&
         flowerBox.y < playerBox.y + playerBox.height &&
-        flowerBox.height + flowerBox.y > playerBox.y) {
+        flowerBox.height + flowerBox.y > playerBox.y &&
+        player.hold === false) {
         
         // Collision detected!
         console.log("Flower Power!");
