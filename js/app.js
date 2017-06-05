@@ -197,25 +197,25 @@ Player.prototype.handleInput = function(dir) {
 	} else if (this.y < 0) {
         // Player is off the top of the board
         this.y = 54;
-    } if (this.hold === true) {
+    } if (this.hold === true && this.y === 54) {
     		if (this.color === 'red' && this.x === 121) {
-    			this.sprite.reset();
+    			this.reset();
     			allFlowers[0].x = 121;
     			allFlowers[0].y = 54;
     		} else if (this.color === 'orange' && this.x === 221) {
-    			this.sprite.reset();
+    			this.reset();
     			allFlowers[1].x = 221;
     			allFlowers[1].y = 54;
     		} else if (this.color === 'pink' && this.x === 321) {
-    			this.sprite.reset();
+    			this.reset();
     			allFlowers[2].x = 321;
     			allFlowers[2].y = 54;
     		} else if (this.color === 'blue' && this.x === 421) {
-    			this.sprite.reset();
+    			this.reset();
     			allFlowers[3].x = 421;
     			allFlowers[3].y = 54;
     		} else if (this.color === 'purple' && this.x === 521) {
-    			this.sprite.reset();
+    			this.reset();
     			allFlowers[4].x = 521;
     			allFlowers[4].y = 54;
     		} else {
@@ -321,8 +321,8 @@ for (var i = 0; i < 7; i++) {
 player = new Player();
 
 // Instantiate the flowers
-var colors = ['red', 'blue', 'orange', 'purple', 'pink'];
-var xValsFlowers = [15, 115, 220, 320, 420, 520, 620];
+var colors = ['red', 'orange', 'pink', 'blue', 'purple'];
+var xValsFlowers = [21, 121, 221, 321, 421, 521, 621];
 var yValsFlowers = [220, 135, 300];
 
 // Create xy variable for flower
