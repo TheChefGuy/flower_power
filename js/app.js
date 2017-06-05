@@ -117,8 +117,9 @@ var Player = function(x,y) {
     // Player collision area
     this.width = 50;
     this.height = 50;
-    // Player holds flower
-    this.hold = false;
+    
+    this.hold = false; // Player holds flower
+    this.color = undefined; // Reflects future color value
 };
 
 // Player reset method
@@ -130,12 +131,13 @@ Player.prototype.reset = function() {
     this.y = 464;
     // Reset hold flower
     this.hold = false;
+    this.color = undefined;
     flower.reset();
 };
 
 // Player update method
 Player.prototype.update = function() {
-
+   
 };
 
 // Player collision method
@@ -195,6 +197,35 @@ Player.prototype.handleInput = function(dir) {
 	} else if (this.y < 0) {
         // Player is off the top of the board
         this.y = 54;
+    } if (this.hold === true) {
+    		if (this.color === 'red' && this.x === 121) {
+    			this.sprite.reset();
+    			allFlowers[0].x = 121;
+    			allFlowers[0].y = 54;
+    		} else if (this.color === 'orange' && this.x === 221) {
+    			this.sprite.reset();
+    			allFlowers[1].x = 221;
+    			allFlowers[1].y = 54;
+    		} else if (this.color === 'pink' && this.x === 321) {
+    			this.sprite.reset();
+    			allFlowers[2].x = 321;
+    			allFlowers[2].y = 54;
+    		} else if (this.color === 'blue' && this.x === 421) {
+    			this.sprite.reset();
+    			allFlowers[3].x = 421;
+    			allFlowers[3].y = 54;
+    		} else if (this.color === 'purple' && this.x === 521) {
+    			this.sprite.reset();
+    			allFlowers[4].x = 521;
+    			allFlowers[4].y = 54;
+    		} else {
+    			// Flower did not match the color
+    			for (k = 0; k < 5; k++ ) {
+    				if (allFlowers[k].color == this.color) {
+    					allFlowers[k].reset();
+    				}
+                }
+            }
     }
 };
 
@@ -261,7 +292,8 @@ Flower.prototype.power = function() {
         this.x = -100;
         this.y = -100;
 
-        player.hold = true;
+        player.hold = true; // Player is now holding a flower
+        player.color = this.color; // Player's color matches the kitty's color
 
         player.flowerPower(this.color);
     }
