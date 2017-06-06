@@ -301,6 +301,89 @@ Flower.prototype.power = function() {
     }
 };
 
+// Create reversed magic bug
+var ReverseBug = function(x,y) {
+    // The image/sprite for our enemies
+    this.sprite = [
+        'images/enemy-red-reversed.png',
+        'images/enemy-purple-reversed.png',
+        'images/enemy-yellow-reversed.png',
+        'images/enemy-blue-reversed.png',
+        'images/enemy-green-reversed.png'
+    ];
+
+      // Variables applied to each instance 
+    this.x = x;
+    this.y = y;
+
+    // Random speed generator
+    this.speed = Math.floor((Math.random() * 4) + 1);
+    
+    // Bug collision area
+    this.width = 50;
+    this.height = 50;
+};
+
+// Update the ReverseBug position, required method for game
+// Parameter: dt, a time delta between ticks
+ReverseBug.prototype.update = function(dt) {
+    // Multiply any movement by the dt parameter to ensure
+    // the game runs at the same speed for all computers.
+    this.x = this.x + 101 * dt * this.speed;
+
+    // If the bug goes off of the board, reset its position and randomize the multiplier
+    if (this.x < -222) {
+    	this.speed = Math.floor((Math.random() * 4) + 1);
+    	this.reset();
+    }
+    // Collision
+    this.collisions();
+};
+
+// Reset the ReversedBug to the right of the board
+ReverseBug.prototype.reset = function() {
+	this.x = 777;
+};
+
+// Draw the bug on the screen, required method for game
+ReverseBug.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite[Math.floor(Math.random() * this.sprite.length)]), this.x, this.y);
+    
+    // Draws boxes around enemy objects
+    // Helped to understand box collision method
+    // drawBox(this.x, this.y + 77, 100, 67, "");
+};
+
+// Collisions - this is bound to an instance of the enemy
+ReverseBug.prototype.collisions = function() {
+    var enemyBox = {
+        // Variables applied to each instance 
+        x: this.x,
+        y: this.y,
+        // ReversedBug collision area
+        width: this.width,
+        height: this.height
+    };
+    var playerBox = {
+        // Variables applied to each instance 
+        x: player.x,
+        y: player.y,
+        // player collision area
+        width: player.width,
+        height: player.height
+    };
+
+    if (enemyBox.x < playerBox.x + playerBox.width &&
+        enemyBox.x + enemyBox.width > playerBox.x &&
+        enemyBox.y < playerBox.y + playerBox.height &&
+        enemyBox.height + enemyBox.y > playerBox.y) {
+        
+        // Magic detected!
+        console.log("Magic is detected.");
+        player.collision();
+    }
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 var allEnemies = [];
@@ -359,6 +442,28 @@ for (var j = 0; j < 5; j++) {
 	// Remove the xy pair from the array
 	xyLocations.splice(index, 1);
 }
+
+
+
+// Now instantiate your objects.
+// Place all reversedBugs objects in an array called allReversedBugs
+var allReversedBugs = [];
+// Y values for enemy starting
+var yValsReversed = [220, 140, 300];
+// Random speed generator to create new speed for new enemy
+// Controls number of reversedBugs on screen
+for (var i = 0; i < 2; i++) {
+    // Random speed for new reversedBug
+    var x = Math.floor((Math.random() * 1000) - 1);
+    // Random row referencing yVals
+    var y = yValsReversed[Math.floor((Math.random() * 3))];
+    reversedBug = new ReverseBug(x, y);
+    // Place new enemy in allReversedBugs array
+    allReversedBugs.push(reversedBug);
+};
+
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method

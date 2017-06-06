@@ -100,6 +100,8 @@ var Engine = (function(global) {
         allFlowers.forEach(function(flower) {
             flower.update();
         });
+
+        
     }
 
     /* This function initially draws the "game level", it will then call
@@ -174,6 +176,10 @@ var Engine = (function(global) {
         allFlowers.forEach(function(flower) {
             flower.render();
         });
+
+        allReversedBugs.forEach(function(reversedBug) {
+            reversedBug.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -213,7 +219,12 @@ var Engine = (function(global) {
         'images/cat-girl-pink.png',
         'images/cat-girl-red.png',
         'images/cat-girl-purple.png',
-        'images/cat-girl-orange.png'
+        'images/cat-girl-orange.png',
+        'images/enemy-red-reversed.png',
+        'images/enemy-purple-reversed.png',
+        'images/enemy-yellow-reversed.png',
+        'images/enemy-blue-reversed.png',
+        'images/enemy-green-reversed.png'
     ]);
     Resources.onReady(init);
 
