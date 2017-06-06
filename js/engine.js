@@ -101,7 +101,9 @@ var Engine = (function(global) {
             flower.update();
         });
 
-        
+        allReversedBugs.forEach(function(reverseBug) {
+        reverseBug.update(dt);
+        });
     }
 
     /* This function initially draws the "game level", it will then call

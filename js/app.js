@@ -303,7 +303,7 @@ Flower.prototype.power = function() {
 
 // Create reversed magic bug
 var ReverseBug = function(x,y) {
-    // The image/sprite for our enemies
+    // The image/sprite for our magic bug
     this.sprite = [
         'images/enemy-red-reversed.png',
         'images/enemy-purple-reversed.png',
@@ -329,12 +329,11 @@ var ReverseBug = function(x,y) {
 ReverseBug.prototype.update = function(dt) {
     // Multiply any movement by the dt parameter to ensure
     // the game runs at the same speed for all computers.
-    this.x = this.x + 101 * dt * this.speed;
+    this.x = this.x - 101 * dt * this.speed;
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
-    if (this.x < -222) {
-    	this.speed = Math.floor((Math.random() * 4) + 1);
-    	this.reset();
+    if (this.x > 777) {
+	this.x = - 100;
     }
     // Collision
     this.collisions();
@@ -381,6 +380,9 @@ ReverseBug.prototype.collisions = function() {
         // Magic detected!
         console.log("Magic is detected.");
         player.collision();
+        allFlowers.forEach(function (flower) {
+            flower.reset();
+        })
     }
 };
 
@@ -448,9 +450,9 @@ for (var j = 0; j < 5; j++) {
 // Now instantiate your objects.
 // Place all reversedBugs objects in an array called allReversedBugs
 var allReversedBugs = [];
-// Y values for enemy starting
+// Y values for reversedBug starting
 var yValsReversed = [220, 140, 300];
-// Random speed generator to create new speed for new enemy
+// Random speed generator to create new speed for new reversedBug
 // Controls number of reversedBugs on screen
 for (var i = 0; i < 2; i++) {
     // Random speed for new reversedBug
