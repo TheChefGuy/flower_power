@@ -332,8 +332,8 @@ ReverseBug.prototype.update = function(dt) {
     this.x = this.x - 101 * dt * this.speed;
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
-    if (this.x > 777) {
-	this.x = - 100;
+    if (this.x < -50) {
+	this.x = 700;
     }
     // Collision
     this.collisions();
