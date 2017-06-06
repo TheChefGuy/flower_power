@@ -1,3 +1,18 @@
+// Helper function to see enemy/player box area
+function drawBox(x, y, width, height, color) {
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.lineWidth = "";
+    ctx.strokeStyle = "";
+    ctx.stroke();
+};
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each instance 
@@ -49,17 +64,6 @@ Enemy.prototype.update = function(dt) {
     this.collisions();
     
 };
-
-// Helper function to see enemy/player box area
-function drawBox(x, y, width, height, color) {
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.lineWidth = "";
-    ctx.strokeStyle = "";
-    ctx.stroke();
-};
-
-
 
 // Reset the enemy to the left of the board
 Enemy.prototype.reset = function() {
@@ -342,6 +346,12 @@ ReverseBug.prototype.update = function(dt) {
 // Reset the ReversedBug to the right of the board
 ReverseBug.prototype.reset = function() {
 	this.x = 777;
+    this.y.getRandomInt();
+};
+
+ReverseBug.prototype.assignRandomRow = function() {
+  this.spriteRow = Math.floor(Math.random() * this.yValsReversed.length);
+  this.sprite = this.sprite[this.spriteRow];
 };
 
 // Draw the bug on the screen, required method for game
@@ -463,9 +473,6 @@ for (var i = 0; i < 2; i++) {
     // Place new enemy in allReversedBugs array
     allReversedBugs.push(reversedBug);
 };
-
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method
