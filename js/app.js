@@ -103,7 +103,9 @@ Enemy.prototype.collisions = function() {
         // Collision detected!
         console.log("Collision is detected.");
         player.collision();
-        flower.reset();
+        allFlowers.forEach(function (flower) {
+            flower.reset();
+        });
     }
 };
 
