@@ -47,7 +47,6 @@ Enemy.prototype.update = function(dt) {
     }
     // Collision
     this.collisions();
-
     
 };
 
@@ -104,6 +103,7 @@ Enemy.prototype.collisions = function() {
         // Collision detected!
         console.log("Collision is detected.");
         player.collision();
+        flower.reset();
     }
 };
 
@@ -132,7 +132,6 @@ Player.prototype.reset = function() {
     // Reset hold flower
     this.hold = false;
     this.color = undefined;
-    flower.reset();
 };
 
 // Player update method
@@ -259,6 +258,7 @@ Flower.prototype.reset = function() {
 
 Flower.prototype.update = function() {
     this.power();
+
 }
 
 // Collisions - this is bound to an instance of the flower
