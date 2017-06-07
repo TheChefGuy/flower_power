@@ -7,12 +7,13 @@ function drawBox(x, y, width, height, color) {
     ctx.stroke();
 };
 
+/*
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
-
+*/
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each instance 
@@ -338,6 +339,8 @@ ReverseBug.prototype.update = function(dt) {
     // If the bug goes off of the board, reset its position and randomize the multiplier
     if (this.x < -50) {
 	this.x = 700;
+    this.assignRandomRow();
+    console.log("assignRandomRow invoked!");
     }
     // Collision
     this.collisions();
@@ -346,7 +349,7 @@ ReverseBug.prototype.update = function(dt) {
 // Reset the ReversedBug to the right of the board
 ReverseBug.prototype.reset = function() {
 	this.x = 777;
-    this.assignRandomRow();
+
 };
 
 ReverseBug.prototype.assignRandomRow = function() {
