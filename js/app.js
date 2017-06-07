@@ -346,12 +346,12 @@ ReverseBug.prototype.update = function(dt) {
 // Reset the ReversedBug to the right of the board
 ReverseBug.prototype.reset = function() {
 	this.x = 777;
-    this.y.getRandomInt();
+    this.assignRandomRow();
 };
 
 ReverseBug.prototype.assignRandomRow = function() {
-  this.spriteRow = Math.floor(Math.random() * this.yValsReversed.length);
-  this.sprite = this.sprite[this.spriteRow];
+  this.spriteRow = Math.floor(Math.random() * yValsReversed.length);
+  this.y = yValsReversed[this.spriteRow];
 };
 
 // Draw the bug on the screen, required method for game
