@@ -79,8 +79,10 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
-        // checkCollisions();
+        if (game.gameOn) {
+            updateEntities(dt);
+            checkCollisions();
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -158,7 +160,34 @@ var Engine = (function(global) {
             }
         }
 
-        renderEntities();
+        if (!game.gameOn) {
+            renderIntro();
+        } else if (player.lives === 0) {
+            renderOutro();
+        } else {
+            renderEntities();
+        }
+    }
+    // Render intro for the game
+    function renderIntro() {
+        var introText = 'Press \'Spacebar\' to play the game';
+        ctx.font = '10pt \'Press Start 2P\'';
+        ctx.fillStyle = '#000';
+        ctx.lineWidth = 1;
+        ctx.strokeText(introText, 40, 515);
+        ctx.fillText(introText, 40, 515);
+    }
+    // Render gameOver once all lives are lost
+    function renderOutro() {
+        var outroText1 = 'GAME OVER';
+        var outroText2 = 'Press \'Spacebar\' to play again';
+        ctx.font = '10pt \'Press Start 2P\'';
+        ctx.fillStyle = '#000';
+        ctx.lineWidth = 1;
+        ctx.strokeText(outroText1, canvas.width / 2 - 60, 255);
+        ctx.fillText(outroText1, canvas.width / 2 - 60, 255);
+        ctx.strokeText(outroText2, 50, 315);
+        ctx.fillText(outroText2, 50, 315);
     }
 
     /* This function is called by the render function and is called on each game
