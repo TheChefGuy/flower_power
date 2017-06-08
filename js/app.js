@@ -15,117 +15,6 @@ function getRandomInt(min, max) {
 }
 */
 
-// Create game constructor
-var Game = function() {
-    this.gameOn = false;
-};
-
-Game.prototype.start = function() {
-    // Now instantiate your objects.
-    // Place all enemy objects in an array called allEnemies
-    var allEnemies = [];
-    // Y values for enemy starting
-    var yValsEnemy = [220, 140, 300];
-
-    // Random speed generator to create new speed for new enemy
-    // Controls number of enemies on screen
-    for (var i = 0; i < 7; i++) {
-        // Random speed for new enemy
-        var x = Math.floor((Math.random() * -1000) + 1);
-        // Random row referencing yVals
-        var y = yValsEnemy[Math.floor(Math.random() * 3)];
-        enemy = new Enemy(x, y);
-        // Place new enemy in allEnemies array
-        allEnemies.push(enemy);
-    };
-
-    // Instantiate player object 
-    player = new Player();
-
-    // Instantiate the flowers
-    var colors = ['pink', 'orange', 'red', 'blue', 'purple'];
-    var xValsFlowers = [21, 121, 221, 321, 421, 521, 621];
-    var yValsFlowers = [220, 135, 300];
-
-    // Create xy variable for flower
-    // Make sure only one flower occupies a space
-    var xyLocations = [];
-
-    // Look through the x & y values and push each location pair
-    // into the xyLocations array
-    for (l = 0; l < xValsFlowers.length; l++) {
-        for (n = 0; n < yValsFlowers.length; n++) {
-            xyLocations.push([xValsFlowers[l], yValsFlowers[n]]);
-        }
-    }
-
-    // Create allFlowers array to hold flower objects
-    var allFlowers = [];
-    // Create the separate flower instances
-    for (var j = 0; j < 5; j++) {
-
-        // Select a random starting location for the flower
-        var index = Math.floor(Math.random() * (21 - j));
-        var xy = xyLocations[index];
-        var x = xy[0];
-        var y = xy[1];
-
-        // Create the new flower object
-        flower = new Flower(colors[j], x, y);
-
-        // Push the new flower into the array
-        allFlowers.push(flower);
-
-        // Remove the xy pair from the array
-        xyLocations.splice(index, 1);
-}
-
-// Now instantiate your objects.
-// Place all reversedBugs objects in an array called allReversedBugs
-var allReversedBugs = [];
-// Y values for reversedBug starting
-var yValsReversed = [220, 140, 300];
-// Random speed generator to create new speed for new reversedBug
-// Controls number of reversedBugs on screen
-for (var i = 0; i < 2; i++) {
-    // Random speed for new reversedBug
-    var x = Math.floor((Math.random() * 1000) - 1);
-    // Random row referencing yVals
-    var y = yValsReversed[Math.floor((Math.random() * 3))];
-    reversedBug = new ReverseBug(x, y);
-    // Place new enemy in allReversedBugs array
-    allReversedBugs.push(reversedBug);
-
-    // Initiate game
-    this.gameOn = true;
-};
-
-// Handle intro and outro spacebar inputs
-Game.prototype.handleInput = function(key) {
-    switch (key) {
-        case 'spacebar':
-            // If the game is not on, turn it on!
-            if (!this.gameOn) {
-                this.start();
-            }
-            // If the game is On and all lives are lost, start the game again
-            if (this.gameOn && player.lives === 0) {
-                this.start();
-            }
-    }
-};
-
-Game.prototype.reset = function() {
-	for (k = 0; k < 5; k++) {
-		allFlowers[k].reset();
-	}
-	player.reset();
-	player.lives = 5;
-	document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
-	game.lose = false;
-	game.win = false;
-};
-
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each instance 
@@ -517,7 +406,122 @@ ReverseBug.prototype.collisions = function() {
     }
 };
 
-game = new Game();
+// Create game constructor
+var Game = function() {
+    this.gameOn = false;
+};
+
+Game.prototype.start = function() {
+    // Now instantiate your objects.
+    // Place all enemy objects in an array called allEnemies
+    var allEnemies;
+    allEnemies = [];
+    // Y values for enemy starting
+    var yValsEnemy = [220, 140, 300];
+
+    // Random speed generator to create new speed for new enemy
+    // Controls number of enemies on screen
+    for (var i = 0; i < 7; i++) {
+        // Random speed for new enemy
+        var x = Math.floor((Math.random() * -1000) + 1);
+        // Random row referencing yVals
+        var y = yValsEnemy[Math.floor(Math.random() * 3)];
+        enemy = new Enemy(x, y);
+        // Place new enemy in allEnemies array
+        allEnemies.push(enemy);
+    };
+
+    // Instantiate player object 
+    var player;
+    player = new Player();
+
+    // Instantiate the flowers
+    var colors = ['pink', 'orange', 'red', 'blue', 'purple'];
+    var xValsFlowers = [21, 121, 221, 321, 421, 521, 621];
+    var yValsFlowers = [220, 135, 300];
+
+    // Create xy variable for flower
+    // Make sure only one flower occupies a space
+    var xyLocations = [];
+
+    // Look through the x & y values and push each location pair
+    // into the xyLocations array
+    for (l = 0; l < xValsFlowers.length; l++) {
+        for (n = 0; n < yValsFlowers.length; n++) {
+            xyLocations.push([xValsFlowers[l], yValsFlowers[n]]);
+        }
+    }
+
+    // Create allFlowers array to hold flower objects
+    var allFlowers;
+    allFlowers = [];
+    // Create the separate flower instances
+    for (var j = 0; j < 5; j++) {
+
+        // Select a random starting location for the flower
+        var index = Math.floor(Math.random() * (21 - j));
+        var xy = xyLocations[index];
+        var x = xy[0];
+        var y = xy[1];
+
+        // Create the new flower object
+        flower = new Flower(colors[j], x, y);
+
+        // Push the new flower into the array
+        allFlowers.push(flower);
+
+        // Remove the xy pair from the array
+        xyLocations.splice(index, 1);
+}
+
+// Now instantiate your objects.
+// Place all reversedBugs objects in an array called allReversedBugs
+var allReversedBugs = [];
+// Y values for reversedBug starting
+var yValsReversed = [220, 140, 300];
+// Random speed generator to create new speed for new reversedBug
+// Controls number of reversedBugs on screen
+for (var i = 0; i < 2; i++) {
+    // Random speed for new reversedBug
+    var x = Math.floor((Math.random() * 1000) - 1);
+    // Random row referencing yVals
+    var y = yValsReversed[Math.floor((Math.random() * 3))];
+    reversedBug = new ReverseBug(x, y);
+    // Place new enemy in allReversedBugs array
+    allReversedBugs.push(reversedBug);
+
+    // Initiate game
+    this.gameOn = true;
+};
+
+// Handle intro and outro spacebar inputs
+Game.prototype.handleInput = function(key) {
+    switch (key) {
+        case 'spacebar':
+            // If the game is not on, turn it on!
+            if (!this.gameOn) {
+                this.start();
+            }
+            // If the game is On and all lives are lost, start the game again
+            if (this.gameOn && player.lives === 0) {
+                this.start();
+            }
+    }
+};
+
+Game.prototype.reset = function() {
+	for (k = 0; k < 5; k++) {
+		allFlowers[k].reset();
+	}
+	player.reset();
+	player.lives = 5;
+	document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
+	game.lose = false;
+	game.win = false;
+};
+
+var game = new Game();
+game.start();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method
