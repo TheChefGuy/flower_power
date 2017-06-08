@@ -1,5 +1,48 @@
-body {
-    text-align: center;
 
-    background: #000;
+
+.zocial-gmail:before,
+.zocial-github:before,
+.zocial-linkedin:before {
+    font-family: 'zocial', sans-serif;
+ 	margin: 5px 10px 5px 25px;
+}
+
+body {
+	background: #fff url("../images/Game.jpg") no-repeat center / cover;
+	font-family: Mogra, cursive;
+    margin-bottom: 10em;
+	padding: 0;
+    max-width: 100%;
+    text-align: center;  
+    -webkit-text-stroke-color: black;	
+}
+
+header {
+	margin: .3em auto -.075em;
+    margin-bottom: -40px;
+	text-transform: uppercase;
+}
+
+.stats {
+	display: flex;
+	font-size: 2rem;
+	-webkit-text-stroke-width: .03em;  	
+	width: 777px;
+}
+
+.title {
+    width: 50%;
+}
+
+.timer {
+    width: 50%;
+}
+
+.lives {
+    margin-top: -20px;
+    font-size: 2em;
+}
+
+a {
+    color: #000;
 }

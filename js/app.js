@@ -14,6 +14,25 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 */
+
+// Create game constructor
+var Game = function() {
+    document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
+    this.win = false;
+    this.win = false;
+};
+
+Game.prototype.reset = function() {
+	for (k = 0; k < 5; k++) {
+		allFlowers[k].reset();
+	}
+	player.reset();
+	player.lives = 5;
+	document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
+	game.lose = false;
+	game.win = false;
+};
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each instance 
@@ -127,6 +146,7 @@ var Player = function(x,y) {
     
     this.hold = false; // Player holds flower
     this.color = undefined; // Reflects future color value
+    this.lives = 5; // Lives per game
 };
 
 // Player reset method
@@ -149,6 +169,11 @@ Player.prototype.update = function() {
 // Player collision method
 Player.prototype.collision = function() {
     player.reset();
+    player.lives--;
+    if (player.lives === 0) {
+        // ToDo: add logic
+    }
+    document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
 };
 
 Player.prototype.flowerPower = function(color) {
