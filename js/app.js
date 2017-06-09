@@ -487,6 +487,7 @@ Game.prototype.start = function() {
 
         // Initiate game
         this.gameOn = true;
+        document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
     }
 };
 
@@ -513,6 +514,7 @@ Game.prototype.reset = function() {
    
     game.lose = false;
     game.win = false;
+    
 };
 
 var allEnemies, player, allFlowers, allReversedBugs, yValsReversed;
