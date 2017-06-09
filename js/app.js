@@ -345,7 +345,7 @@ ReverseBug.prototype.update = function(dt) {
     if (this.x < -50) {
         this.x = 700;
         this.assignRandomRow();
-        console.log("assignRandomRow invoked!");
+        // console.log("assignRandomRow invoked!");
     }
     // Collision
     this.collisions();

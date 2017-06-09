@@ -44,7 +44,7 @@ var Engine = (function(global) {
             if (this.isRunning) {
                 this.time -= delta();
                 this.formattedTime = timeFormatter(this.time);
-                console.log(this.time);
+                // console.log(this.time);
             }
         }
 
@@ -76,7 +76,7 @@ var Engine = (function(global) {
         this.stop = function() {
             clearInterval(interval);
             interval = null;
-            this.time = 60;
+            this.time = 0;
             this.isRunning = false;
         };
     };
@@ -106,6 +106,10 @@ var Engine = (function(global) {
         update(dt);
         render();
         updateStopwatch();
+
+        if (game.gameOn) {
+            watch.start();
+        }
 
         if (watch.time <= 0) {
             watch.stop();
