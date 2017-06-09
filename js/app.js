@@ -16,7 +16,7 @@ function getRandomInt(min, max) {
 */
 
 // Enemies our player must avoid
-var Enemy = function(x,y) {
+var Enemy = function(x, y) {
     // Variables applied to each instance 
     this.x = x;
     this.y = y;
@@ -39,15 +39,15 @@ var Enemy = function(x,y) {
 
     // Random speed generator
     this.speed = Math.floor((Math.random() * 4) + 1);
-    
+
     // Enemy collision area
     this.width = 50;
     this.height = 50;
 };
 
 Enemy.prototype.assignRandomSprite = function() {
-  this.spriteIndex = Math.floor(Math.random() * this.sprites.length);
-  this.sprite = this.sprites[this.spriteIndex];
+    this.spriteIndex = Math.floor(Math.random() * this.sprites.length);
+    this.sprite = this.sprites[this.spriteIndex];
 };
 
 // Update the enemy's position, required method for game
@@ -59,17 +59,17 @@ Enemy.prototype.update = function(dt) {
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
     if (this.x > 777) {
-    	this.speed = Math.floor((Math.random() * 4) + 1);
-    	this.reset();
+        this.speed = Math.floor((Math.random() * 4) + 1);
+        this.reset();
     }
     // Collision
     this.collisions();
-    
+
 };
 
 // Reset the enemy to the left of the board
 Enemy.prototype.reset = function() {
-	this.x = -111;
+    this.x = -111;
     this.assignRandomSprite();
 };
 
@@ -105,18 +105,18 @@ Enemy.prototype.collisions = function() {
         enemyBox.x + enemyBox.width > playerBox.x &&
         enemyBox.y < playerBox.y + playerBox.height &&
         enemyBox.height + enemyBox.y > playerBox.y) {
-        
+
         // Collision detected!
         console.log("Collision is detected.");
         player.collision();
-        allFlowers.forEach(function (flower) {
+        allFlowers.forEach(function(flower) {
             flower.reset();
         });
     }
 };
 
 // Player class
-var Player = function(x,y) {
+var Player = function(x, y) {
     // Load player image
     this.sprite = 'images/char-cat-girl.png';
     // Starting coordinates
@@ -125,7 +125,7 @@ var Player = function(x,y) {
     // Player collision area
     this.width = 50;
     this.height = 50;
-    
+
     this.hold = false; // Player holds flower
     this.color = undefined; // Reflects future color value
     this.lives = 5; // Lives per game
@@ -145,16 +145,13 @@ Player.prototype.reset = function() {
 
 // Player update method
 Player.prototype.update = function() {
-   
+
 };
 
 // Player collision method
 Player.prototype.collision = function() {
     player.reset();
     player.lives--;
-    if (player.lives === 0) {
-        // ToDo: add logic
-    }
     document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
 };
 
@@ -167,7 +164,7 @@ Player.prototype.flowerPower = function(color) {
 // Player render method
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    
+
     // draws a box around player object
     // drawBox(this.x, this.y, 70, 78, "blue");
 };
@@ -175,70 +172,71 @@ Player.prototype.render = function() {
 // Player input handler
 Player.prototype.handleInput = function(dir) {
 
-	// Change the player's position based on the user keyboard input
-	if (dir == 'up') {
-		this.y = this.y - 82;
-	} else if (dir == 'down') {
-		this.y = this.y + 82;
-	} else if (dir == 'left') {
-		this.x = this.x - 100;
-	} else if (dir == 'right') {
-		this.x = this.x + 100;
-	}
+    // Change the player's position based on the user keyboard input
+    if (dir == 'up') {
+        this.y = this.y - 82;
+    } else if (dir == 'down') {
+        this.y = this.y + 82;
+    } else if (dir == 'left') {
+        this.x = this.x - 100;
+    } else if (dir == 'right') {
+        this.x = this.x + 100;
+    }
 
-	// Check the position of the player
-	if (this.x < 0) {
-		// Player is off to the left side of the board, move the player
-		// back to zero
-		this.x = 21;
+    // Check the position of the player
+    if (this.x < 0) {
+        // Player is off to the left side of the board, move the player
+        // back to zero
+        this.x = 21;
 
-	} else if (this.x > 650) {
-		// Player is off to the right side of the board, move the player
-		// back to the right-most square 
-		this.x = 621;
+    } else if (this.x > 650) {
+        // Player is off to the right side of the board, move the player
+        // back to the right-most square 
+        this.x = 621;
 
-	} else if (this.y > 500) {
-		// Player is off the bottom of the board
-		this.y = 464;
+    } else if (this.y > 500) {
+        // Player is off the bottom of the board
+        this.y = 464;
 
-	} else if (this.y === 54 && (this.x === 21 || this.x === 621 )) {
-		// Player made it to one of the two water blocks
+    } else if (this.y === 54 && (this.x === 21 || this.x === 621)) {
+        // Player made it to one of the two water blocks
         console.log("You drowned!");
         this.reset();
         flower.reset();
 
-	} else if (this.y < 0) {
+    } else if (this.y < 0) {
         // Player is off the top of the board
         this.y = 54;
-    } if (this.hold === true && this.y === 54) {
-    		if (this.color === 'pink' && this.x === 121) {
-    			this.reset();
-    			allFlowers[0].x = 121;
-    			allFlowers[0].y = 54;
-    		} else if (this.color === 'orange' && this.x === 221) {
-    			this.reset();
-    			allFlowers[1].x = 221;
-    			allFlowers[1].y = 54;
-    		} else if (this.color === 'red' && this.x === 321) {
-    			this.reset();
-    			allFlowers[2].x = 321;
-    			allFlowers[2].y = 54;
-    		} else if (this.color === 'blue' && this.x === 421) {
-    			this.reset();
-    			allFlowers[3].x = 421;
-    			allFlowers[3].y = 54;
-    		} else if (this.color === 'purple' && this.x === 521) {
-    			this.reset();
-    			allFlowers[4].x = 521;
-    			allFlowers[4].y = 54;
-    		} else {
-    			// Flower did not match the color
-    			for (k = 0; k < 5; k++ ) {
-    				if (allFlowers[k].color == this.color) {
-    					allFlowers[k].reset();
-    				}
+    }
+    if (this.hold === true && this.y === 54) {
+        if (this.color === 'pink' && this.x === 121) {
+            this.reset();
+            allFlowers[0].x = 121;
+            allFlowers[0].y = 54;
+        } else if (this.color === 'orange' && this.x === 221) {
+            this.reset();
+            allFlowers[1].x = 221;
+            allFlowers[1].y = 54;
+        } else if (this.color === 'red' && this.x === 321) {
+            this.reset();
+            allFlowers[2].x = 321;
+            allFlowers[2].y = 54;
+        } else if (this.color === 'blue' && this.x === 421) {
+            this.reset();
+            allFlowers[3].x = 421;
+            allFlowers[3].y = 54;
+        } else if (this.color === 'purple' && this.x === 521) {
+            this.reset();
+            allFlowers[4].x = 521;
+            allFlowers[4].y = 54;
+        } else {
+            // Flower did not match the color
+            for (k = 0; k < 5; k++) {
+                if (allFlowers[k].color == this.color) {
+                    allFlowers[k].reset();
                 }
             }
+        }
     }
 };
 
@@ -299,7 +297,7 @@ Flower.prototype.power = function() {
         flowerBox.y < playerBox.y + playerBox.height &&
         flowerBox.height + flowerBox.y > playerBox.y &&
         player.hold === false) {
-        
+
         // Collision detected!
         console.log("Flower Power!");
         // Move flower of screen
@@ -314,7 +312,7 @@ Flower.prototype.power = function() {
 };
 
 // Create reversed magic bug
-var ReverseBug = function(x,y) {
+var ReverseBug = function(x, y) {
     // The image/sprite for our magic bug
     this.sprite = [
         'images/enemy-red-reversed.png',
@@ -324,13 +322,13 @@ var ReverseBug = function(x,y) {
         'images/enemy-green-reversed.png'
     ];
 
-      // Variables applied to each instance 
+    // Variables applied to each instance 
     this.x = x;
     this.y = y;
 
     // Random speed generator
     this.speed = Math.floor((Math.random() * 4) + 1);
-    
+
     // Bug collision area
     this.width = 50;
     this.height = 50;
@@ -345,9 +343,9 @@ ReverseBug.prototype.update = function(dt) {
 
     // If the bug goes off of the board, reset its position and randomize the multiplier
     if (this.x < -50) {
-	this.x = 700;
-    this.assignRandomRow();
-    console.log("assignRandomRow invoked!");
+        this.x = 700;
+        this.assignRandomRow();
+        console.log("assignRandomRow invoked!");
     }
     // Collision
     this.collisions();
@@ -355,19 +353,19 @@ ReverseBug.prototype.update = function(dt) {
 
 // Reset the ReversedBug to the right of the board
 ReverseBug.prototype.reset = function() {
-	this.x = 777;
+    this.x = 777;
 
 };
 
 ReverseBug.prototype.assignRandomRow = function() {
-  this.spriteRow = Math.floor(Math.random() * yValsReversed.length);
-  this.y = yValsReversed[this.spriteRow];
+    this.spriteRow = Math.floor(Math.random() * yValsReversed.length);
+    this.y = yValsReversed[this.spriteRow];
 };
 
 // Draw the bug on the screen, required method for game
 ReverseBug.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite[Math.floor(Math.random() * this.sprite.length)]), this.x, this.y);
-    
+
     // Draws boxes around enemy objects
     // Helped to understand box collision method
     // drawBox(this.x, this.y + 77, 100, 67, "");
@@ -396,11 +394,11 @@ ReverseBug.prototype.collisions = function() {
         enemyBox.x + enemyBox.width > playerBox.x &&
         enemyBox.y < playerBox.y + playerBox.height &&
         enemyBox.height + enemyBox.y > playerBox.y) {
-        
+
         // Magic detected!
         console.log("Magic is detected.");
         player.collision();
-        allFlowers.forEach(function (flower) {
+        allFlowers.forEach(function(flower) {
             flower.reset();
         })
     }
@@ -414,7 +412,6 @@ var Game = function() {
 Game.prototype.start = function() {
     // Now instantiate your objects.
     // Place all enemy objects in an array called allEnemies
-    var allEnemies;
     allEnemies = [];
     // Y values for enemy starting
     var yValsEnemy = [220, 140, 300];
@@ -432,7 +429,6 @@ Game.prototype.start = function() {
     };
 
     // Instantiate player object 
-    var player;
     player = new Player();
 
     // Instantiate the flowers
@@ -453,7 +449,6 @@ Game.prototype.start = function() {
     }
 
     // Create allFlowers array to hold flower objects
-    var allFlowers;
     allFlowers = [];
     // Create the separate flower instances
     for (var j = 0; j < 5; j++) {
@@ -472,26 +467,27 @@ Game.prototype.start = function() {
 
         // Remove the xy pair from the array
         xyLocations.splice(index, 1);
-}
+    }
 
-// Now instantiate your objects.
-// Place all reversedBugs objects in an array called allReversedBugs
-var allReversedBugs = [];
-// Y values for reversedBug starting
-var yValsReversed = [220, 140, 300];
-// Random speed generator to create new speed for new reversedBug
-// Controls number of reversedBugs on screen
-for (var i = 0; i < 2; i++) {
-    // Random speed for new reversedBug
-    var x = Math.floor((Math.random() * 1000) - 1);
-    // Random row referencing yVals
-    var y = yValsReversed[Math.floor((Math.random() * 3))];
-    reversedBug = new ReverseBug(x, y);
-    // Place new enemy in allReversedBugs array
-    allReversedBugs.push(reversedBug);
+    // Now instantiate your objects.
+    // Place all reversedBugs objects in an array called allReversedBugs
+    allReversedBugs = [];
+    // Y values for reversedBug starting
+    yValsReversed = [220, 140, 300];
+    // Random speed generator to create new speed for new reversedBug
+    // Controls number of reversedBugs on screen
+    for (var i = 0; i < 2; i++) {
+        // Random speed for new reversedBug
+        var x = Math.floor((Math.random() * 1000) - 1);
+        // Random row referencing yVals
+        var y = yValsReversed[Math.floor((Math.random() * 3))];
+        reversedBug = new ReverseBug(x, y);
+        // Place new enemy in allReversedBugs array
+        allReversedBugs.push(reversedBug);
 
-    // Initiate game
-    this.gameOn = true;
+        // Initiate game
+        this.gameOn = true;
+    }
 };
 
 // Handle intro and outro spacebar inputs
@@ -510,18 +506,18 @@ Game.prototype.handleInput = function(key) {
 };
 
 Game.prototype.reset = function() {
-	for (k = 0; k < 5; k++) {
-		allFlowers[k].reset();
-	}
-	player.reset();
-	player.lives = 5;
-	document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
-	game.lose = false;
-	game.win = false;
+    for (k = 0; k < 5; k++) {
+        allFlowers[k].reset();
+    }
+    player.reset();
+   
+    game.lose = false;
+    game.win = false;
 };
 
+var allEnemies, player, allFlowers, allReversedBugs, yValsReversed;
 var game = new Game();
-game.start();
+game.handleInput();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method
@@ -543,4 +539,4 @@ document.addEventListener('keyup', function(e) {
     if (e.keyCode in allowedKeys) {
         e.preventDefault();
     }
-})};
+});
