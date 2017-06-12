@@ -469,7 +469,6 @@ Game.prototype.start = function() {
         xyLocations.splice(index, 1);
     }
 
-    // Now instantiate your objects.
     // Place all reversedBugs objects in an array called allReversedBugs
     allReversedBugs = [];
     // Y values for reversedBug starting
@@ -485,10 +484,12 @@ Game.prototype.start = function() {
         // Place new enemy in allReversedBugs array
         allReversedBugs.push(reversedBug);
 
-        // Initiate game
+        
+    }
+    // Initiate game
         this.gameOn = true;
         document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
-    }
+
 };
 
 // Handle intro and outro spacebar inputs
@@ -503,9 +504,13 @@ Game.prototype.handleInput = function(key) {
             if (this.gameOn && player.lives === 0) {
                 this.start();
             }
+            if (!this.gameOn) {
+            watch.time = 6000;
+            this.start();
+            }
             // If the game is On and the time has expired, start game again
             if (this.gameOn && watch.time === 0) {
-                this.start();
+            this.start();
             }
     }
 };

@@ -46,6 +46,7 @@ var Engine = (function(global) {
                 this.formattedTime = timeFormatter(this.time);
                 // console.log(this.time);
             }
+            global.watch = new Stopwatch();
         }
 
         // Delta time used to make time consistent
@@ -76,7 +77,7 @@ var Engine = (function(global) {
         this.stop = function() {
             clearInterval(interval);
             interval = null;
-            this.time = 0;
+            this.time = 6000;
             this.isRunning = false;
         };
     };
@@ -110,7 +111,7 @@ var Engine = (function(global) {
         if (game.gameOn) {
             watch.start();
         }
-
+        
         if (watch.time <= 0) {
             watch.stop();
         }
@@ -256,6 +257,8 @@ var Engine = (function(global) {
         ctx.fillText(outroText1, canvas.width / 2 - 60, 255);
         ctx.strokeText(outroText2, 199, 333);
         ctx.fillText(outroText2, 199, 333);
+        game.gameOn = false;
+        watch.time = 0;
     }
 
     /* This function is called by the render function and is called on each game
