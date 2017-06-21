@@ -469,6 +469,7 @@ Game.prototype.start = function() {
         xyLocations.splice(index, 1);
     }
 
+    // Now instantiate reverseBugs.
     // Place all reversedBugs objects in an array called allReversedBugs
     allReversedBugs = [];
     // Y values for reversedBug starting
@@ -485,11 +486,11 @@ Game.prototype.start = function() {
         allReversedBugs.push(reversedBug);
 
         
-    }
+    
     // Initiate game
         this.gameOn = true;
         document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
-
+    }
 };
 
 // Handle intro and outro spacebar inputs
@@ -546,7 +547,7 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+    if (game.gameOn){ player.handleInput(allowedKeys[e.keyCode])};
     if (e.keyCode in allowedKeys) {
         e.preventDefault();
     }

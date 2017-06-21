@@ -33,7 +33,7 @@ var Engine = (function(global) {
      * https://youtu.be/jRhB1IG7uAw
      */
     var Stopwatch = function() {
-        this.time = 6000; // 60 seconds
+        this.time = 10000; // 100 seconds
         var interval;
         var offset;
 
@@ -77,7 +77,7 @@ var Engine = (function(global) {
         this.stop = function() {
             clearInterval(interval);
             interval = null;
-            this.time = 6000;
+            this.time = 0;
             this.isRunning = false;
         };
     };
