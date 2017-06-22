@@ -1,6 +1,20 @@
-frontend-nanodegree-arcade-game
+Flower-Power
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+Save the Flowers!
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+### Where to Play
+
+Play the game [here!](https://soonjoouh.github.io/Not-frogger/)
+
+### Main Objective
+
+Get all 5 flower to their correct colored blocks at the top of the screen.
+
+### How to Play
+
+- Use the arrow keys to move Player around the board
+- Pick up each Flower and move it to the correct colored block
+- Watch out for the enemy bugs! If you hit one of these, you'll lose a life and both Player and the Flowers will reset
+- Player resets when stepping in the water
+- Refresh the page to reset the game (including when you win or lose)

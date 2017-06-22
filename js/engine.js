@@ -45,8 +45,9 @@ var Engine = (function(global) {
                 this.time -= delta();
                 this.formattedTime = timeFormatter(this.time);
                 // console.log(this.time);
-            }
+            
             global.watch = new Stopwatch();
+            }
         }
 
         // Delta time used to make time consistent
@@ -111,11 +112,10 @@ var Engine = (function(global) {
         if (game.gameOn) {
             watch.start();
         }
-        
         if (watch.time <= 0) {
             watch.stop();
         }
-
+        
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
