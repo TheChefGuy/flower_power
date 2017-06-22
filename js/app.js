@@ -517,7 +517,7 @@ Game.prototype.handleInput = function(key) {
 };
 
 Game.prototype.reset = function() {
-    for (k = 0; k < 5; k++) {
+    for (k = 0; k < 3; k++) {
         allFlowers[k].reset();
     }
     player.reset();
