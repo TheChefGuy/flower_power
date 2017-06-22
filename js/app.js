@@ -418,7 +418,7 @@ Game.prototype.start = function() {
 
     // Random speed generator to create new speed for new enemy
     // Controls number of enemies on screen
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 3; i++) {
         // Random speed for new enemy
         var x = Math.floor((Math.random() * -1000) + 1);
         // Random row referencing yVals
@@ -517,7 +517,7 @@ Game.prototype.handleInput = function(key) {
 };
 
 Game.prototype.reset = function() {
-    for (k = 0; k < 3; k++) {
+    for (k = 0; k < 5; k++) {
         allFlowers[k].reset();
     }
     player.reset();
