@@ -13,7 +13,6 @@
  * the canvas' context (ctx) object globally available to make writing app.js
  * a little simpler to work with.
  */
-
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -45,7 +44,7 @@ var Engine = (function(global) {
                 this.time -= delta();
                 this.formattedTime = timeFormatter(this.time);
                 // console.log(this.time);
-            
+
             }
         }
 
@@ -114,7 +113,7 @@ var Engine = (function(global) {
         if (watch.time <= 0) {
             watch.stop();
         }
-        
+
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -172,7 +171,7 @@ var Engine = (function(global) {
         });
 
         allReversedBugs.forEach(function(reverseBug) {
-        reverseBug.update(dt);
+            reverseBug.update(dt);
         });
     }
 
@@ -187,15 +186,15 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             topRowImages = [
-                'images/water-block.png',   // top row has special images
+                'images/water-block.png', // top row has special images
                 'images/stone-block-pink.png',
                 'images/stone-block-orange.png',
                 'images/stone-block-red.png',
@@ -220,7 +219,7 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                if (row===0) {
+                if (row === 0) {
                     ctx.drawImage(Resources.get(topRowImages[col]), col * 101, row * 83);
                 } else {
                     ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
@@ -293,9 +292,10 @@ var Engine = (function(global) {
             watch.start();
         }
     }
+
     function updateStopwatch() {
         document.getElementsByClassName('timer')[0].innerHTML = 'Time: ' + watch.time;
-        
+
         //ctx.fillText("Time left: " + watch.formattedTime, 320, 33);
     }
 

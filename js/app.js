@@ -5,7 +5,7 @@ function drawBox(x, y, width, height, color) {
     ctx.lineWidth = "";
     ctx.strokeStyle = "";
     ctx.stroke();
-};
+}
 
 /*
 function getRandomInt(min, max) {
@@ -159,7 +159,7 @@ Player.prototype.flowerPower = function(color) {
     // Change player image when touch flower
     player.power = this.sprite = 'images/cat-girl-' + color + '.png';
     this.hold = true;
-}
+};
 
 // Player render method
 Player.prototype.render = function() {
@@ -266,12 +266,12 @@ Flower.prototype.render = function() {
 Flower.prototype.reset = function() {
     this.x = this.xo;
     this.y = this.yo;
-}
+};
 
 Flower.prototype.update = function() {
     this.power();
 
-}
+};
 
 // Collisions - this is bound to an instance of the flower
 Flower.prototype.power = function() {
@@ -400,7 +400,7 @@ ReverseBug.prototype.collisions = function() {
         player.collision();
         allFlowers.forEach(function(flower) {
             flower.reset();
-        })
+        });
     }
 };
 
@@ -426,7 +426,7 @@ Game.prototype.start = function() {
         enemy = new Enemy(x, y);
         // Place new enemy in allEnemies array
         allEnemies.push(enemy);
-    };
+    }
 
     // Instantiate player object 
     player = new Player();
@@ -485,9 +485,9 @@ Game.prototype.start = function() {
         // Place new enemy in allReversedBugs array
         allReversedBugs.push(reversedBug);
 
-        
-    
-    // Initiate game
+
+
+        // Initiate game
         this.gameOn = true;
         document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
     }
@@ -511,7 +511,7 @@ Game.prototype.handleInput = function(key) {
             }
             // If the game is On and the time has expired, start game again
             if (this.gameOn && watch.time === 0) {
-            this.start();
+                this.start();
             }
     }
 };
@@ -521,10 +521,10 @@ Game.prototype.reset = function() {
         allFlowers[k].reset();
     }
     player.reset();
-   
+
     game.lose = false;
     game.win = false;
-    
+
 };
 
 var allEnemies, player, allFlowers, allReversedBugs, yValsReversed;
@@ -547,7 +547,9 @@ document.addEventListener('keyup', function(e) {
         40: 'down'
     };
 
-    if (game.gameOn){ player.handleInput(allowedKeys[e.keyCode])};
+    if (game.gameOn) {
+        player.handleInput(allowedKeys[e.keyCode]);
+    }
     if (e.keyCode in allowedKeys) {
         e.preventDefault();
     }
