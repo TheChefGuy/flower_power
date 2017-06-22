@@ -46,7 +46,6 @@ var Engine = (function(global) {
                 this.formattedTime = timeFormatter(this.time);
                 // console.log(this.time);
             
-            global.watch = new Stopwatch();
             }
         }
 
@@ -83,7 +82,7 @@ var Engine = (function(global) {
         };
     };
 
-    var watch = new Stopwatch();
+    global.watch = new Stopwatch();
 
     canvas.width = 707;
     canvas.height = 606;

@@ -17,4 +17,4 @@ Get all 5 flower to their correct colored blocks at the top of the screen.
 - Pick up each Flower and move it to the correct colored block
 - Watch out for the enemy bugs! If you hit one of these, you'll lose a life and both Player and the Flowers will reset
 - Player resets when stepping in the water
-- Refresh the page to reset the game (including when you win or lose)
+- Refresh the page to reset the game.
