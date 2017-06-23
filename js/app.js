@@ -150,14 +150,14 @@ Player.prototype.update = function() {
 
 // Player collision method
 Player.prototype.collision = function() {
-    player.reset();
-    player.lives--;
+    this.reset();
+    this.lives--;
     document.getElementsByClassName('lives')[0].innerHTML = 'Lives: ' + player.lives;
 };
 
 Player.prototype.flowerPower = function(color) {
     // Change player image when touch flower
-    player.power = this.sprite = 'images/cat-girl-' + color + '.png';
+    this.power = this.sprite = 'images/cat-girl-' + color + '.png';
     this.hold = true;
 };
 
@@ -522,8 +522,8 @@ Game.prototype.reset = function() {
     }
     player.reset();
 
-    game.lose = false;
-    game.win = false;
+    this.lose = false;
+    this.win = false;
 
 };
 
