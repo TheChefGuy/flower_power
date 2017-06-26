@@ -500,13 +500,15 @@ Game.prototype.handleInput = function(key) {
             // If the game is not on, turn it on!
             if (!this.gameOn) {
                 this.start();
+                this.gameOn = true;
+                watch.time = 10000;
             }
             // If the game is On and all lives are lost, start the game again
             if (this.gameOn && player.lives === 0) {
                 this.start();
             }
             if (!this.gameOn) {
-                watch.time = 6000;
+                watch.time = 10000;
                 this.start();
             }
             // If the game is On and the time has expired, start game again
