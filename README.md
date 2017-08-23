@@ -5,7 +5,7 @@ Save the Flowers!
 
 ### Where to Play
 
-Play the game [here!](https://thechefguy.github.com/flower_power/)
+Play the game [here!](https://thechefguy.github.io/flower_power/)
 
 ### Main Objective
 
