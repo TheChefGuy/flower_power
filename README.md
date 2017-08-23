@@ -5,7 +5,7 @@ Save the Flowers!
 
 ### Where to Play
 
-Play the game [here!](https://soonjoouh.github.io/Not-frogger/)
+Play the game [here!](https://thechefguy.github.io/Not-frogger/)
 
 ### Main Objective
 
